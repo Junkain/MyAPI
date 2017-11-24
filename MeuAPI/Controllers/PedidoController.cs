@@ -11,6 +11,13 @@ namespace MeuAPI.Controllers
 
     public class PedidoController : ApiController
     {
+        [HttpPost]
+        public void MandarFormulario()
+        {
+            
+
+            
+        }
 
         [HttpGet]
         public List<Pedido> ObterPedidos()

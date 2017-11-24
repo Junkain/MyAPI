@@ -6,7 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <button id="btnSubmit">Submit</button>
+    <input type="text" name="lblID"/>
+    <input type="text" name="lblDescricao" />
+    <input type="text" name="lblValorTotal" />
+
+    <button id="btnSubmit">Submit</button><br />
+    <button id="btnSalvar">Salvar</button>
+
     <table id="tblPedido">
         <tr>
             <th>ID</th>
@@ -19,8 +25,26 @@
 
     <script type="text/javascript">
         var btnSubmit = document.getElementById('btnSubmit');
+        var btnSalvar = document.getElementById('btnSalvar');
+
+        var id = document.getElementById('lblId');
+        var descricao = document.getElementById('lblDescricao');
+        var valorTotal = document.getElementById('lblValorTotal');
 
 
+
+        
+        btnSalvar.onclick = function () {
+            var data = { id: id, descricao: descricao, valorTotal: valorTotal };
+
+            $.ajax({
+                url: "/api/Pedido/MandarFormulario",
+                method: "POST",
+                cache: false,
+                dataType: "json",
+                data: data
+            })
+        }
 
         btnSubmit.onclick = function () {
             $.ajax({
@@ -35,13 +59,13 @@
 
                         $.each(data, function (i, item) {
                             alert(data[i].id);
-                            $('#tblPedido').append('<tr> <td>' + data.id +'</td> <td>' + data.descricao + '</td> <td>' + data.valorTotal + '</td> </tr>');
+                            $('#tblPedido').append('<tr> <td>' + data[i].id +'</td> <td>' + data[i].descricao + '</td> <td>' + data[i].valorTotal + '</td> </tr>');
                         })
 
 
                     }
 
-
+                        
                 },
                 error: function (xhr) {
                     tratarExcecao(xhr);
