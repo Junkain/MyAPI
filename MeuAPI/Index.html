@@ -7,7 +7,7 @@
 </head>
 <body>
     <button id="btnSubmit">Submit</button>
-    <table>
+    <table id="tblPedido">
         <tr>
             <th>ID</th>
             <th>Descricao</th>
@@ -20,10 +20,9 @@
     <script type="text/javascript">
         var btnSubmit = document.getElementById('btnSubmit');
 
-            
+
 
         btnSubmit.onclick = function () {
-            alert('Estou aqui!');
             $.ajax({
                 url: "/api/Pedido/ObterPedidos",
                 method: "GET",
@@ -33,8 +32,13 @@
                     if (!data) {
                         alert("Nenhuma pessoa foi encontrada!");
                     } else {
-                        // Perceba que aqui, data é na verdade um array!!!
-                        alert("Pessoas encontradas: " + data.length);
+
+                        $.each(data, function (i, item) {
+                            alert(data[i].id);
+                            $('#tblPedido').append('<tr> <td>' + data.id +'</td> <td>' + data.descricao + '</td> <td>' + data.valorTotal + '</td> </tr>');
+                        })
+
+
                     }
 
 
