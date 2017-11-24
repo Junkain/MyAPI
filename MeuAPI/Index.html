@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btnSubmit">Submit</button>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Descricao</th>
+            <th>Valor Total</th>
+        </tr>
+
+
+    </table>
+
+    <script type="text/javascript">
+        var btnSubmit = document.getElementById('btnSubmit');
+
+            
+
+        btnSubmit.onclick = function () {
+            alert('Estou aqui!');
+            $.ajax({
+                url: "/api/Pedido/ObterPedidos",
+                method: "GET",
+                cache: false,
+                dataType: "json",
+                success: function (data) {
+                    if (!data) {
+                        alert("Nenhuma pessoa foi encontrada!");
+                    } else {
+                        // Perceba que aqui, data é na verdade um array!!!
+                        alert("Pessoas encontradas: " + data.length);
+                    }
+
+
+                },
+                error: function (xhr) {
+                    tratarExcecao(xhr);
+                }
+
+
+            });
+
+        }
+
+
+    </script>
+
+</body>
+</html>
