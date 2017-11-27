@@ -9,9 +9,9 @@ namespace MeuAPI.Models
 {
     public class Pedido 
     {
-        public int id { get; set; }
-        public string descricao { get; set; }
-        public double valorTotal { get; set; }
+        public int Id { get; set; }
+        public string Descricao { get; set; }
+        public double ValorTotal { get; set; }
 
     }
 }

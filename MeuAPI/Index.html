@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <input type="text" id="lblID" />
@@ -27,15 +28,15 @@
         var btnSubmit = document.getElementById('btnSubmit');
         var btnSalvar = document.getElementById('btnSalvar');
 
-        var id = document.getElementById('lblID');
         var descricao = document.getElementById('lblDescricao');
-        var valorTotal = document.getElementById('lblValorTotal');
+        var valorTotal = document.getElementById('lblValorTotal')
 
 
 
         
         btnSalvar.onclick = function () {
-            var pedido = { id: id, descricao: descricao.value, valorTotal: valorTotal.value };
+            alert("Passei aqui!");
+            var pedido = {Descricao: descricao, ValorTotal: valorTotal };
 
             $.ajax({
                 url: "/api/Pedido/MandarFormulario",
@@ -68,8 +69,8 @@
                     } else {
 
                         $.each(data, function (i, item) {
-                            alert(data[i].id);
-                            $('#tblPedido').append('<tr> <td>' + data[i].id +'</td> <td>' + data[i].descricao + '</td> <td>' + data[i].valorTotal + '</td> </tr>');
+                            alert(data[i].Id);
+                            $('#tblPedido').append('<tr> <td>' + data[i].Id +'</td> <td>' + data[i].Descricao + '</td> <td>' + data[i].ValorTotal + '</td> </tr>');
                         })
 
 
