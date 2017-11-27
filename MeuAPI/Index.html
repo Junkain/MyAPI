@@ -6,9 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <input type="text" name="lblID"/>
-    <input type="text" name="lblDescricao" />
-    <input type="text" name="lblValorTotal" />
+    <input type="text" id="lblID" />
+    <input type="text" id="lblDescricao" />
+    <input type="text" id="lblValorTotal" />
 
     <button id="btnSubmit">Submit</button><br />
     <button id="btnSalvar">Salvar</button>
@@ -27,7 +27,7 @@
         var btnSubmit = document.getElementById('btnSubmit');
         var btnSalvar = document.getElementById('btnSalvar');
 
-        var id = document.getElementById('lblId');
+        var id = document.getElementById('lblID');
         var descricao = document.getElementById('lblDescricao');
         var valorTotal = document.getElementById('lblValorTotal');
 
@@ -35,14 +35,24 @@
 
         
         btnSalvar.onclick = function () {
-            var data = { id: id, descricao: descricao, valorTotal: valorTotal };
+            var pedido = { id: id, descricao: descricao.value, valorTotal: valorTotal.value };
 
             $.ajax({
                 url: "/api/Pedido/MandarFormulario",
                 method: "POST",
                 cache: false,
                 dataType: "json",
-                data: data
+                data: pedido,
+                success: function (data) {
+                    if (!data) {
+                        alert("Nenhum dado enviado");
+                    } else {
+                        alert("Pedido salvo com sucesso!");
+                    }
+
+                }
+
+
             })
         }
 
