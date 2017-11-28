@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <!--<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>-->
 </head>
 <body>
-    <input type="text" id="lblID" />
-    <input type="text" id="lblDescricao" />
-    <input type="text" id="lblValorTotal" />
+    <!--<input type="text" id="lblID" />-->
+    <input type="text" id="lblDescricao" placeholder="descrição" />
+    <input type="text" id="lblValorTotal" placeholder="valor" />
 
     <button id="btnSubmit">Submit</button><br />
     <button id="btnSalvar">Salvar</button>
@@ -28,15 +28,19 @@
         var btnSubmit = document.getElementById('btnSubmit');
         var btnSalvar = document.getElementById('btnSalvar');
 
-        var descricao = document.getElementById('lblDescricao');
-        var valorTotal = document.getElementById('lblValorTotal')
-
-
-
+        debugger;
         
         btnSalvar.onclick = function () {
-            alert("Passei aqui!");
-            var pedido = {Descricao: descricao, ValorTotal: valorTotal };
+
+            var descricao = $('#lblDescricao').val();
+            var valorTotal = $('#lblValorTotal').val();
+
+            var pedido = {
+                Descricao: descricao,
+                ValorTotal: valorTotal
+            };
+
+            //var DTO = JSON.stringify(pedido);
 
             $.ajax({
                 url: "/api/Pedido/MandarFormulario",

@@ -5,8 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace MeuAPI.Controllers
 {
@@ -14,23 +12,13 @@ namespace MeuAPI.Controllers
     public class PedidoController : ApiController
     {
         [HttpPost]
-        public void MandarFormulario([FromBody] string Descricao, [FromBody] double ValorTotal)
+        public HttpRequestMessage MandarFormulario(Pedido pedido)
         {
-           
-            using (SqlConnection conn = new SqlConnection("Server=tcp:junkainapi.database.windows.net,1433;Database=MeuAPI;User ID=dunada;Password=Junkain21!;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
-            {
-                conn.Open();
-
-                // Cria um comando para inserir um novo registro à tabela
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO tbPedidos (DESCRICAO, VALORTOTAL) VALUES ( @descricao, @valortotal)", conn))
-                {
-                    cmd.Parameters.AddWithValue("@descricao", Descricao);
-                    cmd.Parameters.AddWithValue("@valortotal", ValorTotal);
-                    cmd.ExecuteNonQuery();
-                }
-            }
 
 
+            
+
+            return null;
         }
 
         [HttpGet]
