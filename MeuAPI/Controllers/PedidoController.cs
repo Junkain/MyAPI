@@ -12,11 +12,13 @@ namespace MeuAPI.Controllers
     public class PedidoController : ApiController
     {
         [HttpPost]
-        public void MandarFormulario()
+        public HttpRequestMessage MandarFormulario(Pedido pedido)
         {
-            
+
 
             
+
+            return null;
         }
 
         [HttpGet]
@@ -28,23 +30,23 @@ namespace MeuAPI.Controllers
 
             p = new Pedido();
 
-            p.id = 1;
-            p.descricao = "Coxinha";
-            p.valorTotal = 3.15;
+            p.Id = 1;
+            p.Descricao = "Coxinha";
+            p.ValorTotal = 3.15;
             pedidos.Add(p);
 
             p = new Pedido();
 
-            p.id = 2;
-            p.descricao = "Hamburgão";
-            p.valorTotal = 5.00;
+            p.Id = 2;
+            p.Descricao = "Hamburgão";
+            p.ValorTotal = 5.00;
             pedidos.Add(p);
 
             p = new Pedido();
 
-            p.id = 3;
-            p.descricao = "Esiha";
-            p.valorTotal = 4.00;
+            p.Id = 3;
+            p.Descricao = "Esiha";
+            p.ValorTotal = 4.00;
             pedidos.Add(p);
 
             return pedidos;

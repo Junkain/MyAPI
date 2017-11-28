@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>-->
 </head>
 <body>
-    <input type="text" name="lblID"/>
-    <input type="text" name="lblDescricao" />
-    <input type="text" name="lblValorTotal" />
+    <!--<input type="text" id="lblID" />-->
+    <input type="text" id="lblDescricao" placeholder="descrição" />
+    <input type="text" id="lblValorTotal" placeholder="valor" />
 
     <button id="btnSubmit">Submit</button><br />
     <button id="btnSalvar">Salvar</button>
@@ -27,22 +28,36 @@
         var btnSubmit = document.getElementById('btnSubmit');
         var btnSalvar = document.getElementById('btnSalvar');
 
-        var id = document.getElementById('lblId');
-        var descricao = document.getElementById('lblDescricao');
-        var valorTotal = document.getElementById('lblValorTotal');
-
-
-
+        debugger;
         
         btnSalvar.onclick = function () {
-            var data = { id: id, descricao: descricao, valorTotal: valorTotal };
+
+            var descricao = $('#lblDescricao').val();
+            var valorTotal = $('#lblValorTotal').val();
+
+            var pedido = {
+                Descricao: descricao,
+                ValorTotal: valorTotal
+            };
+
+            //var DTO = JSON.stringify(pedido);
 
             $.ajax({
                 url: "/api/Pedido/MandarFormulario",
                 method: "POST",
                 cache: false,
                 dataType: "json",
-                data: data
+                data: pedido,
+                success: function (data) {
+                    if (!data) {
+                        alert("Nenhum dado enviado");
+                    } else {
+                        alert("Pedido salvo com sucesso!");
+                    }
+
+                }
+
+
             })
         }
 
@@ -58,8 +73,8 @@
                     } else {
 
                         $.each(data, function (i, item) {
-                            alert(data[i].id);
-                            $('#tblPedido').append('<tr> <td>' + data[i].id +'</td> <td>' + data[i].descricao + '</td> <td>' + data[i].valorTotal + '</td> </tr>');
+                            alert(data[i].Id);
+                            $('#tblPedido').append('<tr> <td>' + data[i].Id +'</td> <td>' + data[i].Descricao + '</td> <td>' + data[i].ValorTotal + '</td> </tr>');
                         })
 
 
