@@ -1,8 +1,6 @@
 ﻿using MeuAPI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using System.Data.SqlClient;
 using System.Net.Http;
 using System.Web.Http;
 
@@ -14,9 +12,18 @@ namespace MeuAPI.Controllers
         [HttpPost]
         public HttpRequestMessage MandarFormulario(Pedido pedido)
         {
+            using (SqlConnection conn = new SqlConnection("Server=tcp:junkainapi.database.windows.net,1433;Database=MeuAPI;User ID=dunada;Password=Junkain21!;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+            {
+                conn.Open();
+                
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO tbPedidos (DESCRICAO, VALORTOTAL) VALUES (@descricao, @valortotal)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@descricao", pedido.Descricao);
+                    cmd.Parameters.AddWithValue("@valortotal", pedido.ValorTotal);
 
-
-            
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             return null;
         }
